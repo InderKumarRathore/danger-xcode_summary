@@ -21,6 +21,7 @@ module Danger
   class DangerXcodeSummary < Plugin
     Location = Struct.new(:file_name, :file_path, :line)
     Result = Struct.new(:message, :location)
+    Warning = Struct.new(:message, :sticky, :location)
 
     # The project root, which will be used to make the paths relative.
     # Defaults to `pwd`.
@@ -134,12 +135,18 @@ module Danger
     private
 
     def format_summary(xcode_summary)
+      # Warning = Struct.new(:message, :sticky, :location)
+      all_warnings = []
       xcode_summary.actions_invocation_record.actions.each do |action|
         warnings(action).each do |result|
           if inline_mode && result.location
-            warn(result.message, sticky: false, file: result.location.file_path, line: result.location.line)
+            # warn(result.message, sticky: false, file: result.location.file_path, line: result.location.line)
+            warning_object = Warning.new(result.message, false, result.location)
+            all_warnings << warning_object
           else
-            warn(result.message, sticky: false)
+            # warn(result.message, sticky: false)
+            warning_object = Warning.new(result.message, false, nil)
+            all_warnings << warning_object
           end
         end
         errors(action).each do |result|
@@ -156,6 +163,21 @@ module Danger
               warn(result.message, sticky: false)
             end
           end
+        end
+      end
+      all_warnings = all_warnings.sort_by do |warning|
+        if warning.message.include?("deprecated")
+          1
+        else
+          0
+        end
+      end
+
+      all_warnings.each do |warning|
+        if inline_mode && warning.location
+          warn(warning.message, sticky: warning.sticky, file: warning.location.file_path, line: warning.location.line)
+        else
+          warn(warning.message, sticky: warning.sticky)
         end
       end
     end

@@ -6,14 +6,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'xcode_summary/gem_version.rb'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'danger-xcode_summary'
+  spec.name          = 'danger-ikr-xcode_summary'
   spec.version       = XcodeSummary::VERSION
-  spec.authors       = ['Diogo Tridapalli', 'Marcelo Fabri']
-  spec.email         = ['me@diogot.com', 'me@marcelofabri.com']
+  spec.authors       = ['Diogo Tridapalli', 'Marcelo Fabri', 'Inder']
+  spec.email         = ['xxxxxxxxxxxx1234523xxxxxxx21@gmail.com']
   spec.description   = 'Show formatted xcodebuild output in your PRs.'
   spec.summary       = 'A [Danger](http://danger.systems) plugin that shows all build errors, ' \
                        'warnings and unit tests results generated from `xcodebuild`.'
-  spec.homepage      = 'https://github.com/diogot/danger-xcode_summary'
+  spec.homepage      = 'https://github.com/InderKumarRathore/danger-xcode_summary'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)

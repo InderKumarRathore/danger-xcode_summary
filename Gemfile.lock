@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    danger-xcode_summary (1.2.0)
+    danger-ikr-xcode_summary (1.2.0)
       danger-plugin-api (~> 1.0)
       xcresult (~> 0.2)
 
@@ -159,7 +159,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (>= 2.2.10)
   danger
-  danger-xcode_summary!
+  danger-ikr-xcode_summary!
   guard (~> 2.14)
   guard-rspec (~> 4.7)
   listen (~> 3.0)
